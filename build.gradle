@@ -2,6 +2,8 @@ buildscript {
 
     ext {
         gradle_version = '7.0.4'
+
+        coroutines_version = '1.6.2'
         kotlin_version = '1.6.10'
 
         androidx_appcompat_version = '1.4.1'
@@ -10,6 +12,10 @@ buildscript {
 
         material_version = '1.6.0'
         navigation_version = '2.4.2'
+
+        junit_version = '4.13.2'
+
+        mockk_version = '1.12.3'
     }
 
     repositories {
