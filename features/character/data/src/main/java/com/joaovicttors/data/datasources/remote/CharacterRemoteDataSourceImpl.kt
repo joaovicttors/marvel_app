@@ -7,14 +7,14 @@ import com.joaovicttors.data.models.CharacterResponse
 import com.joaovicttors.domain.entities.Character
 
 class CharacterRemoteDataSourceImpl(
-    private val mapper: BaseMapper<CharacterResponse, Character>,
+    private val mapper: BaseMapper<CharacterResponse.Character, Character>,
     private val service: CharacterRemoteService,
 ) : CharacterRemoteDataSource {
 
     override suspend fun getCharacterList(): Response<List<Character>> {
         return try {
             service.getCharacterList().let { data ->
-                data.map { mapper.mapToDomainEntity(it) }.let { mappedData ->
+                data.data.results.map { mapper.mapToDomainEntity(it) }.let { mappedData ->
                     Response.Success(mappedData)
                 }
             }

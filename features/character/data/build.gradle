@@ -12,6 +12,10 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
 
+    implementation("com.google.code.gson:gson:$gson_version")
+    
+    implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
+
     testImplementation("junit:junit:$junit_version")
 
     testImplementation("io.mockk:mockk:$mockk_version")

@@ -9,7 +9,7 @@ import org.junit.Test
 
 internal class CharacterResponseMapperTest {
 
-    private lateinit var mapper: BaseMapper<CharacterResponse, Character>
+    private lateinit var mapper: BaseMapper<CharacterResponse.Character, Character>
 
     @Before
     fun before() {
@@ -18,7 +18,7 @@ internal class CharacterResponseMapperTest {
 
     @Test
     fun `when mapToDomainEntity called`() {
-        val data = CharacterResponse(
+        val data = CharacterResponse.Character(
             id = 1,
             name = "t",
             thumbnail = CharacterResponse.Thumbnail(path = "t", extension = "t"),
@@ -49,6 +49,6 @@ internal class CharacterResponseMapperTest {
             resourceUri = "t"
         )
 
-        val domainEntity = mapper.mapFromDomainEntity(data)
+        mapper.mapFromDomainEntity(data)
     }
 }
