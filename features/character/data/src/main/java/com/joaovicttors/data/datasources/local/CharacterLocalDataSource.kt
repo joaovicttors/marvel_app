@@ -1,9 +1,12 @@
-package com.joaovicttors.domain.repositories
+package com.joaovicttors.data.datasources.local
 
 import com.joaovicttors.bases.Response
 import com.joaovicttors.domain.entities.Character
 
-interface CharacterRepository {
+interface CharacterLocalDataSource {
+
+    suspend fun addCharacterList(characterList: List<Character>)
 
     suspend fun getCharacterList(): Response<List<Character>>
+
 }

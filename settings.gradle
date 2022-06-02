@@ -10,3 +10,4 @@ rootProject.name = "Marvel App"
 include ':app'
 include ':features:character:domain'
 include ':core:bases'
+include ':features:character:data'
