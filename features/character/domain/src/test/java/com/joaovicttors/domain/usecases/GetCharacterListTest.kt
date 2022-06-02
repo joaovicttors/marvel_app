@@ -9,7 +9,6 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -29,27 +28,27 @@ internal class GetCharacterListTest {
     fun `when GetCharacterList called and repository returns Error it should return Error`() = runBlocking { ->
         val expectedErrorMessage = "Runtime Error"
 
-        coEvery { characterRepository.characterList() } returns flowOf(Response.Error(expectedErrorMessage))
+        coEvery { characterRepository.getCharacterList() } returns Response.Error(expectedErrorMessage)
 
-        useCase().collect { response ->
-            assertTrue(response is Response.Error)
-            assertEquals(expectedErrorMessage, (response as Response.Error).message)
-        }
+        val response = useCase()
 
-        coVerify(exactly = 1) { characterRepository.characterList() }
+        coVerify(exactly = 1) { characterRepository.getCharacterList() }
+
+        assertTrue(response is Response.Error)
+        assertEquals(expectedErrorMessage, (response as Response.Error).message)
     }
 
     @Test
     fun `when GetCharacterList called and repository returns Success it should return Success`() = runBlocking { ->
         val expectedCharacterList = listOf<Character>(mockk(), mockk())
 
-        coEvery { characterRepository.characterList() } returns flowOf(Response.Success(expectedCharacterList))
+        coEvery { characterRepository.getCharacterList() } returns Response.Success(expectedCharacterList)
 
-        useCase().collect { response ->
-            assertTrue(response is Response.Success)
-            assertEquals(expectedCharacterList, (response as Response.Success).data)
-        }
+        val response = useCase()
 
-        coVerify(exactly = 1) { characterRepository.characterList() }
+        coVerify(exactly = 1) { characterRepository.getCharacterList() }
+
+        assertTrue(response is Response.Success)
+        assertEquals(expectedCharacterList, (response as Response.Success).data)
     }
 }
