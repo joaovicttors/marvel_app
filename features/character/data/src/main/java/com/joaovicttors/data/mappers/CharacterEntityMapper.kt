@@ -7,10 +7,22 @@ import com.joaovicttors.domain.entities.Character
 class CharacterEntityMapper : BaseMapper<CharacterEntity, Character>() {
 
     override fun mapToDomainEntity(input: CharacterEntity): Character {
-        TODO("Not yet implemented")
+        return Character(
+            input.id,
+            input.name,
+            input.thumbnail,
+            input.description,
+            input.resourceUri,
+        )
     }
 
     override fun mapFromDomainEntity(input: Character): CharacterEntity {
-        TODO("Not yet implemented")
+        return CharacterEntity(
+            input.id,
+            input.name,
+            input.thumbnail,
+            input.description,
+            input.resourceUri,
+        )
     }
 }
