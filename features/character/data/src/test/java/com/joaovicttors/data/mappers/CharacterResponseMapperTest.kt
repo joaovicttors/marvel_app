@@ -1,27 +1,27 @@
 package com.joaovicttors.data.mappers
 
 import com.joaovicttors.bases.data.BaseMapper
-import com.joaovicttors.data.models.CharacterEntity
+import com.joaovicttors.data.models.CharacterResponse
 import com.joaovicttors.domain.entities.Character
-import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase
 import org.junit.Before
 import org.junit.Test
 
-internal class CharacterEntityMapperTest {
+internal class CharacterResponseMapperTest {
 
-    private lateinit var mapper: BaseMapper<CharacterEntity, Character>
+    private lateinit var mapper: BaseMapper<CharacterResponse, Character>
 
     @Before
     fun before() {
-        mapper = CharacterEntityMapper()
+        mapper = CharacterResponseMapper()
     }
 
     @Test
     fun `when mapToDomainEntity called`() {
-        val data = CharacterEntity(
+        val data = CharacterResponse(
             id = 1,
             name = "t",
-            thumbnail = "t",
+            thumbnail = CharacterResponse.Thumbnail(path = "t", extension = "t"),
             description = "t",
             resourceUri = "t"
         )
@@ -29,36 +29,26 @@ internal class CharacterEntityMapperTest {
         val expectedData = Character(
             id = 1,
             name = "t",
-            thumbnail = "t",
+            thumbnail = "tt",
             description = "t",
             resourceUri = "t"
         )
 
         val domainEntity = mapper.mapToDomainEntity(data)
 
-        assertEquals(expectedData, domainEntity)
+        TestCase.assertEquals(expectedData, domainEntity)
     }
 
-    @Test
+    @Test(expected = NotImplementedError::class)
     fun `when mapFromDomainEntity called`() {
         val data = Character(
             id = 1,
             name = "t",
-            thumbnail = "t",
-            description = "t",
-            resourceUri = "t"
-        )
-
-        val expectedData =CharacterEntity(
-            id = 1,
-            name = "t",
-            thumbnail = "t",
+            thumbnail = "tt",
             description = "t",
             resourceUri = "t"
         )
 
         val domainEntity = mapper.mapFromDomainEntity(data)
-
-        assertEquals(expectedData, domainEntity)
     }
 }
