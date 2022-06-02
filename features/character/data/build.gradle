@@ -7,18 +7,25 @@ dependencies {
     implementation project(':core:bases')
     implementation project(':features:character:domain')
 
+    // KOTLIN
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
 
+    // COROUTINES
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
 
+    // GSON
     implementation("com.google.code.gson:gson:$gson_version")
 
+    // RETROFIT
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
 
-    implementation("android.arch.persistence.room:runtime:1.1.1")
+    // ARCH ROOM
+    implementation("android.arch.persistence.room:runtime:$arch_room_version")
 
+    // JUNIT
     testImplementation("junit:junit:$junit_version")
 
+    // MOCKK
     testImplementation("io.mockk:mockk:$mockk_version")
 }
