@@ -8,5 +8,4 @@ interface CharacterLocalDataSource {
     suspend fun addCharacterList(characterList: List<Character>)
 
     suspend fun getCharacterList(): Response<List<Character>>
-
 }

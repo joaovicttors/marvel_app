@@ -1,4 +1,6 @@
 package com.joaovicttors.data.models
 
-class CharacterResponse {
+import com.joaovicttors.bases.data.BaseModel
+
+class CharacterResponse : BaseModel() {
 }

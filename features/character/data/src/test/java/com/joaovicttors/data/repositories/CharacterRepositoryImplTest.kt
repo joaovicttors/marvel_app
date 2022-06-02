@@ -15,6 +15,7 @@ import org.junit.Before
 import org.junit.Test
 
 internal class CharacterRepositoryImplTest {
+
     private val localDataSource: CharacterLocalDataSource = mockk()
     private val remoteDataSource: CharacterRemoteDataSource = mockk()
 
@@ -26,42 +27,42 @@ internal class CharacterRepositoryImplTest {
     }
 
     @Test
-    fun `getCharacterList from local and remote datasource returns Error`() = runBlocking { ->
-            val expectedErrorMessage = "Runtime Error"
+    fun `when getCharacterList from local and remote datasource returns Error`() = runBlocking { ->
+        val expectedErrorMessage = "Runtime Error"
 
-            coEvery { localDataSource.getCharacterList() } returns Response.Error("")
-            coEvery { remoteDataSource.getCharacterList() } returns Response.Error(expectedErrorMessage)
+        coEvery { localDataSource.getCharacterList() } returns Response.Error("")
+        coEvery { remoteDataSource.getCharacterList() } returns Response.Error(expectedErrorMessage)
 
-            val response = repository.getCharacterList()
+        val response = repository.getCharacterList()
 
-            coVerify(exactly = 0) { localDataSource.addCharacterList(any()) }
-            coVerify(exactly = 1) { localDataSource.getCharacterList() }
-            coVerify(exactly = 1) { remoteDataSource.getCharacterList() }
+        coVerify(exactly = 0) { localDataSource.addCharacterList(any()) }
+        coVerify(exactly = 1) { localDataSource.getCharacterList() }
+        coVerify(exactly = 1) { remoteDataSource.getCharacterList() }
 
-            assertTrue(response is Response.Error)
-            assertEquals(expectedErrorMessage, (response as Response.Error).message)
-        }
-
-    @Test
-    fun `getCharacterList from local datasource returns Error and remote returns Success`() = runBlocking { ->
-            val expectedData = listOf<Character>(mockk(), mockk())
-
-            coEvery { localDataSource.addCharacterList(expectedData) } returns Unit
-            coEvery { localDataSource.getCharacterList() } returns Response.Error("")
-            coEvery { remoteDataSource.getCharacterList() } returns Response.Success(expectedData)
-
-            val response = repository.getCharacterList()
-
-            coVerify(exactly = 1) { localDataSource.addCharacterList(expectedData) }
-            coVerify(exactly = 1) { localDataSource.getCharacterList() }
-            coVerify(exactly = 1) { remoteDataSource.getCharacterList() }
-
-            assertTrue(response is Response.Success)
-            assertEquals(expectedData, (response as Response.Success).data)
-        }
+        assertTrue(response is Response.Error)
+        assertEquals(expectedErrorMessage, (response as Response.Error).message)
+    }
 
     @Test
-    fun `getCharacterList from local datasource returns Success and data is empty`() = runBlocking { ->
+    fun `when getCharacterList from local datasource returns Error and remote returns Success`() = runBlocking { ->
+        val expectedData = listOf<Character>(mockk(), mockk())
+
+        coEvery { localDataSource.addCharacterList(expectedData) } returns Unit
+        coEvery { localDataSource.getCharacterList() } returns Response.Error("")
+        coEvery { remoteDataSource.getCharacterList() } returns Response.Success(expectedData)
+
+        val response = repository.getCharacterList()
+
+        coVerify(exactly = 1) { localDataSource.addCharacterList(expectedData) }
+        coVerify(exactly = 1) { localDataSource.getCharacterList() }
+        coVerify(exactly = 1) { remoteDataSource.getCharacterList() }
+
+        assertTrue(response is Response.Success)
+        assertEquals(expectedData, (response as Response.Success).data)
+    }
+
+    @Test
+    fun `when getCharacterList from local datasource returns Success and data is empty`() = runBlocking { ->
         val expectedData = listOf<Character>(mockk(), mockk())
 
         coEvery { localDataSource.addCharacterList(expectedData) } returns Unit
@@ -79,7 +80,7 @@ internal class CharacterRepositoryImplTest {
     }
 
     @Test
-    fun `getCharacterList from local datasource returns Success and data is not empty`() = runBlocking { ->
+    fun `when getCharacterList from local datasource returns Success and data is not empty`() = runBlocking { ->
         val expectedData = listOf<Character>(mockk(), mockk())
 
         coEvery { localDataSource.getCharacterList() } returns Response.Success(expectedData)

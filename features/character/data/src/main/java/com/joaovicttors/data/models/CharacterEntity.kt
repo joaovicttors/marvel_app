@@ -1,4 +1,6 @@
 package com.joaovicttors.data.models
 
-class CharacterEntity {
+import com.joaovicttors.bases.data.BaseModel
+
+class CharacterEntity : BaseModel() {
 }
