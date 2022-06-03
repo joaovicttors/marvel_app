@@ -7,25 +7,25 @@ dependencies {
     implementation project(':core:bases')
     implementation project(':features:character:domain')
 
-    // KOTLIN
+    // Kotlin
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
 
-    // COROUTINES
+    // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
 
-    // GSON
+    // Gson
     implementation("com.google.code.gson:gson:$gson_version")
 
-    // RETROFIT
+    // Retrofit
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
 
-    // ARCH ROOM
+    // Arch Room
     implementation("android.arch.persistence.room:runtime:$arch_room_version")
 
-    // JUNIT
+    // JUnit
     testImplementation("junit:junit:$junit_version")
 
-    // MOCKK
+    // Mockk
     testImplementation("io.mockk:mockk:$mockk_version")
 }
