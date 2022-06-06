@@ -23,7 +23,7 @@ internal class CharacterListViewModelTest {
     val mainCoroutineScope = MainCoroutineScope()
 
     private val dispatcher: CoroutineDispatcher = UnconfinedTestDispatcher()
-    private val getCharacterList: BaseUseCase<Nothing, List<Character>> = mockk()
+    private val getCharacterList: BaseUseCase<Int, List<Character>> = mockk()
 
     private lateinit var viewModel: CharacterListViewModel
 
@@ -38,7 +38,7 @@ internal class CharacterListViewModelTest {
         val expectedData = emptyList<Character>()
         val expectedErrorMessage = "Runtime Error"
 
-        coEvery { getCharacterList() } returns Response.Error(expectedErrorMessage)
+        coEvery { getCharacterList(0) } returns Response.Error(expectedErrorMessage)
 
         viewModel.getCharacterList()
 
@@ -53,7 +53,7 @@ internal class CharacterListViewModelTest {
         val expectedData = listOf<Character>(mockk(), mockk())
         val expectedErrorMessage = null
 
-        coEvery { getCharacterList() } returns Response.Success(expectedData)
+        coEvery { getCharacterList(0) } returns Response.Success(expectedData)
 
         viewModel.getCharacterList()
 
@@ -68,7 +68,7 @@ internal class CharacterListViewModelTest {
         val expectedData = emptyList<Character>()
         val expectedErrorMessage = null
 
-        coEvery { getCharacterList() } coAnswers { delay(timeMillis = 1); Response.Error("") }
+        coEvery { getCharacterList(0) } coAnswers { delay(timeMillis = 1); Response.Error("") }
 
         viewModel.getCharacterList()
 

@@ -13,8 +13,10 @@ import kotlinx.coroutines.launch
 
 class CharacterListViewModel(
     private val dispatcher: CoroutineDispatcher,
-    private val getCharacterListUseCase: BaseUseCase<Nothing, List<Character>>,
+    private val getCharacterListUseCase: BaseUseCase<Int, List<Character>>,
 ) : ViewModel() {
+
+    var offset: Int = 0
 
     val viewState: StateFlow<CharacterListViewState> get() = _viewState
     private val _viewState = MutableStateFlow(CharacterListViewState())
@@ -24,9 +26,9 @@ class CharacterListViewModel(
             try {
                 _viewState.update { it.copy(isLoading = true) }
 
-                when (val response = getCharacterListUseCase()) {
+                when (val response = getCharacterListUseCase(offset)) {
                     is Response.Error -> _viewState.update { it.copy(errorMessage = response.message) }
-                    is Response.Success -> _viewState.update { it.copy(data = response.data) }
+                    is Response.Success -> _viewState.update { it.copy(data = response.data) }.also { offset += 20 }
                 }
 
             } catch (error: Exception) {

@@ -30,14 +30,14 @@ internal class CharacterRepositoryImplTest {
     fun `when getCharacterList from local and remote datasource returns Error`() = runBlocking { ->
         val expectedErrorMessage = "Runtime Error"
 
-        coEvery { localDataSource.getCharacterList() } returns Response.Error("")
-        coEvery { remoteDataSource.getCharacterList() } returns Response.Error(expectedErrorMessage)
+        coEvery { localDataSource.getCharacterList(0) } returns Response.Error("")
+        coEvery { remoteDataSource.getCharacterList(0) } returns Response.Error(expectedErrorMessage)
 
-        val response = repository.getCharacterList()
+        val response = repository.getCharacterList(0)
 
         coVerify(exactly = 0) { localDataSource.addCharacterList(any()) }
-        coVerify(exactly = 1) { localDataSource.getCharacterList() }
-        coVerify(exactly = 1) { remoteDataSource.getCharacterList() }
+        coVerify(exactly = 1) { localDataSource.getCharacterList(0) }
+        coVerify(exactly = 1) { remoteDataSource.getCharacterList(0) }
 
         assertTrue(response is Response.Error)
         assertEquals(expectedErrorMessage, (response as Response.Error).message)
@@ -48,14 +48,14 @@ internal class CharacterRepositoryImplTest {
         val expectedData = listOf<Character>(mockk(), mockk())
 
         coEvery { localDataSource.addCharacterList(expectedData) } returns Unit
-        coEvery { localDataSource.getCharacterList() } returns Response.Error("")
-        coEvery { remoteDataSource.getCharacterList() } returns Response.Success(expectedData)
+        coEvery { localDataSource.getCharacterList(0) } returns Response.Error("")
+        coEvery { remoteDataSource.getCharacterList(0) } returns Response.Success(expectedData)
 
-        val response = repository.getCharacterList()
+        val response = repository.getCharacterList(0)
 
         coVerify(exactly = 1) { localDataSource.addCharacterList(expectedData) }
-        coVerify(exactly = 1) { localDataSource.getCharacterList() }
-        coVerify(exactly = 1) { remoteDataSource.getCharacterList() }
+        coVerify(exactly = 1) { localDataSource.getCharacterList(0) }
+        coVerify(exactly = 1) { remoteDataSource.getCharacterList(0) }
 
         assertTrue(response is Response.Success)
         assertEquals(expectedData, (response as Response.Success).data)
@@ -66,14 +66,14 @@ internal class CharacterRepositoryImplTest {
         val expectedData = listOf<Character>(mockk(), mockk())
 
         coEvery { localDataSource.addCharacterList(expectedData) } returns Unit
-        coEvery { localDataSource.getCharacterList() } returns Response.Success(emptyList())
-        coEvery { remoteDataSource.getCharacterList() } returns Response.Success(expectedData)
+        coEvery { localDataSource.getCharacterList(0) } returns Response.Success(emptyList())
+        coEvery { remoteDataSource.getCharacterList(0) } returns Response.Success(expectedData)
 
-        val response = repository.getCharacterList()
+        val response = repository.getCharacterList(0)
 
         coVerify(exactly = 1) { localDataSource.addCharacterList(expectedData) }
-        coVerify(exactly = 1) { localDataSource.getCharacterList() }
-        coVerify(exactly = 1) { remoteDataSource.getCharacterList() }
+        coVerify(exactly = 1) { localDataSource.getCharacterList(0) }
+        coVerify(exactly = 1) { remoteDataSource.getCharacterList(0) }
 
         assertTrue(response is Response.Success)
         assertEquals(expectedData, (response as Response.Success).data)
@@ -83,14 +83,14 @@ internal class CharacterRepositoryImplTest {
     fun `when getCharacterList from local datasource returns Success and data is not empty`() = runBlocking { ->
         val expectedData = listOf<Character>(mockk(), mockk())
 
-        coEvery { localDataSource.getCharacterList() } returns Response.Success(expectedData)
+        coEvery { localDataSource.getCharacterList(0) } returns Response.Success(expectedData)
 
 
-        val response = repository.getCharacterList()
+        val response = repository.getCharacterList(0)
 
         coVerify(exactly = 0) { localDataSource.addCharacterList(any()) }
-        coVerify(exactly = 1) { localDataSource.getCharacterList() }
-        coVerify(exactly = 0) { remoteDataSource.getCharacterList() }
+        coVerify(exactly = 1) { localDataSource.getCharacterList(0) }
+        coVerify(exactly = 0) { remoteDataSource.getCharacterList(0) }
 
         assertTrue(response is Response.Success)
         assertEquals(expectedData, (response as Response.Success).data)

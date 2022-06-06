@@ -19,7 +19,7 @@ internal class CharacterEntityMapperTest {
     @Test
     fun `when mapToDomainEntity called`() {
         val data = CharacterEntity(
-            id = 1,
+            characterId = 1,
             name = "t",
             thumbnail = "t",
             description = "t",
@@ -50,7 +50,7 @@ internal class CharacterEntityMapperTest {
         )
 
         val expectedData =CharacterEntity(
-            id = 1,
+            characterId = 1,
             name = "t",
             thumbnail = "t",
             description = "t",

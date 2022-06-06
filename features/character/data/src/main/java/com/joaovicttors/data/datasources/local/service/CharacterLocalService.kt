@@ -12,6 +12,6 @@ interface CharacterLocalService {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addCharacterList(characterList: List<CharacterEntity>)
 
-    @Query(value = "SELECT * FROM character")
-    suspend fun getCharacterList(): List<CharacterEntity>
+    @Query(value = "SELECT * FROM character ORDER BY id ASC LIMIT 20 OFFSET :offset")
+    suspend fun getCharacterList(offset: Int): List<CharacterEntity>
 }

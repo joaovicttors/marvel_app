@@ -11,9 +11,9 @@ class CharacterRemoteDataSourceImpl(
     private val service: CharacterRemoteService,
 ) : CharacterRemoteDataSource {
 
-    override suspend fun getCharacterList(): Response<List<Character>> {
+    override suspend fun getCharacterList(offset: Int): Response<List<Character>> {
         return try {
-            service.getCharacterList().let { data ->
+            service.getCharacterList(offset).let { data ->
                 data.data.results.map { mapper.mapToDomainEntity(it) }.let { mappedData ->
                     Response.Success(mappedData)
                 }

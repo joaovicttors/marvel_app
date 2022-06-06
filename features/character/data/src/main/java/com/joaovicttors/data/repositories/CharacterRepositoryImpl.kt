@@ -11,17 +11,17 @@ class CharacterRepositoryImpl(
     private val remoteDataSource: CharacterRemoteDataSource,
 ) : CharacterRepository {
 
-    override suspend fun getCharacterList(): Response<List<Character>> {
-        return localDataSource.getCharacterList().let { response ->
+    override suspend fun getCharacterList(offset: Int): Response<List<Character>> {
+        return localDataSource.getCharacterList(offset).let { response ->
             return@let when (response) {
-                is Response.Error -> getRemoteCharacterList()
-                is Response.Success -> if (response.data.isNotEmpty()) response else getRemoteCharacterList()
+                is Response.Error -> getRemoteCharacterList(offset)
+                is Response.Success -> if (response.data.isNotEmpty()) response else getRemoteCharacterList(offset)
             }
         }
     }
 
-    private suspend fun getRemoteCharacterList(): Response<List<Character>>  {
-        return remoteDataSource.getCharacterList().also { response ->
+    private suspend fun getRemoteCharacterList(offset: Int): Response<List<Character>>  {
+        return remoteDataSource.getCharacterList(offset).also { response ->
             if (response is Response.Success) localDataSource.addCharacterList(response.data)
         }
     }

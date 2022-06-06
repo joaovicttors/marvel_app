@@ -10,7 +10,7 @@ class CharacterResponseMapper : BaseMapper<CharacterResponse.Character, Characte
         return Character(
             id = input.id,
             name = input.name,
-            thumbnail = input.thumbnail?.path + input.thumbnail?.extension,
+            thumbnail = input.thumbnail?.path + "/standard_medium." + input.thumbnail?.extension,
             description = input.description,
             resourceUri = input.resourceUri,
         )

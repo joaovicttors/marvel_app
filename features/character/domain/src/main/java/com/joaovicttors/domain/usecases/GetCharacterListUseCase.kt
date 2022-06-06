@@ -5,11 +5,11 @@ import com.joaovicttors.bases.domain.BaseUseCase
 import com.joaovicttors.domain.entities.Character
 import com.joaovicttors.domain.repositories.CharacterRepository
 
-class GetCharacterList(
+class GetCharacterListUseCase(
     private val characterRepository: CharacterRepository
-) : BaseUseCase<Nothing, List<Character>>() {
+) : BaseUseCase<Int, List<Character>>() {
 
-    override suspend fun invoke(): Response<List<Character>> {
-        return characterRepository.getCharacterList()
+    override suspend fun invoke(param: Int): Response<List<Character>> {
+        return characterRepository.getCharacterList(param)
     }
 }

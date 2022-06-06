@@ -75,13 +75,13 @@ internal class CharacterLocalDataSourceImplTest {
     fun `when getCharacterList from service returns Error`() = runBlocking { ->
         val expectedErrorMessage = "Runtime Error"
 
-        coEvery { service.getCharacterList() } throws RuntimeException(expectedErrorMessage)
+        coEvery { service.getCharacterList(0) } throws RuntimeException(expectedErrorMessage)
 
-        val response = dataSource.getCharacterList()
+        val response = dataSource.getCharacterList(0)
 
         coVerify(exactly = 0) { mapper.mapToDomainEntity(any()) }
         coVerify(exactly = 0) { mapper.mapFromDomainEntity(any()) }
-        coVerify(exactly = 1) { service.getCharacterList() }
+        coVerify(exactly = 1) { service.getCharacterList(0) }
 
         assertTrue(response is Response.Error)
         assertEquals(expectedErrorMessage, (response as Response.Error).message)
@@ -93,13 +93,13 @@ internal class CharacterLocalDataSourceImplTest {
         val expectedErrorMessage = "Runtime Error"
 
         coEvery { mapper.mapToDomainEntity(data[0]) } throws RuntimeException(expectedErrorMessage)
-        coEvery { service.getCharacterList() } returns data
+        coEvery { service.getCharacterList(0) } returns data
 
-        val response = dataSource.getCharacterList()
+        val response = dataSource.getCharacterList(0)
 
         coVerify(exactly = 1) { mapper.mapToDomainEntity(any()) }
         coVerify(exactly = 0) { mapper.mapFromDomainEntity(any()) }
-        coVerify(exactly = 1) { service.getCharacterList() }
+        coVerify(exactly = 1) { service.getCharacterList(0) }
 
         assertTrue(response is Response.Error)
         assertEquals(expectedErrorMessage, (response as Response.Error).message)
@@ -111,13 +111,13 @@ internal class CharacterLocalDataSourceImplTest {
         val expectedData = listOf<Character>(mockk())
 
         coEvery { mapper.mapToDomainEntity(data[0]) } returns expectedData[0]
-        coEvery { service.getCharacterList() } returns data
+        coEvery { service.getCharacterList(0) } returns data
 
-        val response = dataSource.getCharacterList()
+        val response = dataSource.getCharacterList(0)
 
         coVerify(exactly = 1) { mapper.mapToDomainEntity(data[0]) }
         coVerify(exactly = 0) { mapper.mapFromDomainEntity(any()) }
-        coVerify(exactly = 1) { service.getCharacterList() }
+        coVerify(exactly = 1) { service.getCharacterList(0) }
 
         assertTrue(response is Response.Success)
         assertEquals(expectedData, (response as Response.Success).data)

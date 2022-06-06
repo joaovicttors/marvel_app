@@ -4,5 +4,5 @@ import com.joaovicttors.bases.Response
 
 abstract class BaseUseCase<In, Out> {
 
-   abstract suspend operator fun invoke(): Response<Out>
+   abstract suspend operator fun invoke(param: In): Response<Out>
 }

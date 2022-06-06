@@ -29,7 +29,7 @@ internal class CharacterResponseMapperTest {
         val expectedData = Character(
             id = 1,
             name = "t",
-            thumbnail = "tt",
+            thumbnail = "t/standard_medium.t",
             description = "t",
             resourceUri = "t"
         )

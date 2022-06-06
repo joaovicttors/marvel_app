@@ -21,9 +21,9 @@ class CharacterLocalDataSourceImpl(
         }
     }
 
-    override suspend fun getCharacterList(): Response<List<Character>> {
+    override suspend fun getCharacterList(offset: Int): Response<List<Character>> {
         return try {
-            service.getCharacterList().let { data ->
+            service.getCharacterList(offset).let { data ->
                 data.map { mapper.mapToDomainEntity(it) }.let { mappedData ->
                     Response.Success(mappedData)
                 }

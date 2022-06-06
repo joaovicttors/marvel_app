@@ -8,7 +8,7 @@ class CharacterEntityMapper : BaseMapper<CharacterEntity, Character>() {
 
     override fun mapToDomainEntity(input: CharacterEntity): Character {
         return Character(
-            id = input.id,
+            id = input.characterId,
             name = input.name,
             thumbnail = input.thumbnail,
             description = input.description,
@@ -18,7 +18,7 @@ class CharacterEntityMapper : BaseMapper<CharacterEntity, Character>() {
 
     override fun mapFromDomainEntity(input: Character): CharacterEntity {
         return CharacterEntity(
-            id = input.id,
+            characterId = input.id,
             name = input.name,
             thumbnail = input.thumbnail,
             description = input.description,

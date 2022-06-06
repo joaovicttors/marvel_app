@@ -1,4 +1,4 @@
-package com.joaovicttors.bases
+package com.joaovicttors.extensions
 
 import org.junit.Test
 
