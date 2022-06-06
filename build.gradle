@@ -2,14 +2,27 @@ buildscript {
 
     ext {
         gradle_version = '7.0.4'
+
+        coroutines_version = '1.6.2'
         kotlin_version = '1.6.10'
 
         androidx_appcompat_version = '1.4.1'
         androidx_constraint_version = '2.1.4'
         androidx_core_version = '1.7.0'
+        androidx_navigation_version = '2.4.2'
+        androidx_room_version = '2.4.2'
+        androidx_lifecycle_version = '2.5.0-rc01'
+        androidx_recycler_view_version = '1.2.1'
 
         material_version = '1.6.0'
-        navigation_version = '2.4.2'
+
+        koin_version = '3.1.6'
+        gson_version = '2.9.0'
+        retrofit_version = '2.9.0'
+        arch_room_version = '1.1.1'
+
+        junit_version = '4.13.2'
+        mockk_version = '1.12.3'
     }
 
     repositories {
@@ -20,7 +33,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$androidx_navigation_version"
     }
 }
 

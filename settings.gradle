@@ -8,3 +8,10 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Marvel App"
 include ':app'
+include ':features:character:domain'
+include ':core:bases'
+include ':features:character:data'
+include ':features:character:presentation'
+include ':core:extensions'
+include ':core:bindings'
+include ':core:commons'
